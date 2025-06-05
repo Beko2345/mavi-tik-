@@ -233,152 +233,6 @@ result_box = tk.Listbox(window, width=70, height=8)
 result_box.pack(pady=5)
 tk.Button(window, text="Klasörü Aç", command=open_selected_folder).pack()
 
-log_area = scrolledtext.ScrolledText(window, width=70, height=15)
-log_area.pack(padx=10, pady=10)
-
-load_config()
-window.mainloop()
-
-    win = tk.Toplevel(window)
-    win.title("🔎 Metin Dosyasında Ara (Pencere)")
-    win.geometry("520x400")
-    tk.Label(win, text="Aranacak Kelime:").pack()
-    entry = tk.Entry(win, width=40)
-    entry.pack()
-    result_box = tk.Listbox(win, width=70, height=15)
-    result_box.pack(pady=10)
-    def perform():
-        term = entry.get().strip().lower()
-        result_box.delete(0, tk.END)
-        if not term: return
-        base_path = Path(folder_var.get()) / subreddit_entry.get()
-        for post_folder in base_path.glob("*"):
-            for txt_file in post_folder.glob("*.txt"):
-                try:
-                    with open(txt_file, "r", encoding="utf-8") as f:
-                        if term in f.read().lower():
-                            result_box.insert(tk.END, str(post_folder))
-                            break
-                except: continue
-
-    def open_folder():
-        selected = result_box.get(tk.ACTIVE)
-        if selected:
-            subprocess.Popen(f'explorer "{selected}"' if os.name == "nt" else ["xdg-open", selected])
-
-    tk.Button(win, text="Ara", command=perform).pack(pady=5)
-    tk.Button(win, text="Klasörü Aç", command=open_folder).pack()
-
-# GUI üzerine ek buton
-# Sonuna ekle:
-
-# Son hali
-log_area = scrolledtext.ScrolledText(window, width=70, height=15)
-log_area.pack(padx=10, pady=10)
-
-load_config()
-window.mainloop()
-
-    win = tk.Toplevel(window)
-    win.title("🔎 Metin Dosyasında Ara (Pencere)")
-    win.geometry("520x400")
-    tk.Label(win, text="Aranacak Kelime:").pack()
-    entry = tk.Entry(win, width=40)
-    entry.pack()
-    result_box = tk.Listbox(win, width=70, height=15)
-    result_box.pack(pady=10)
-    def perform():
-        term = entry.get().strip().lower()
-        result_box.delete(0, tk.END)
-        if not term: return
-        base_path = Path(folder_var.get()) / subreddit_entry.get()
-        for post_folder in base_path.glob("*"):
-            for txt_file in post_folder.glob("*.txt"):
-                try:
-                    with open(txt_file, "r", encoding="utf-8") as f:
-                        if term in f.read().lower():
-                            result_box.insert(tk.END, str(post_folder))
-                            break
-                except: continue
-
-    def open_folder():
-        selected = result_box.get(tk.ACTIVE)
-        if selected:
-            subprocess.Popen(f'explorer "{selected}"' if os.name == "nt" else ["xdg-open", selected])
-
-    tk.Button(win, text="Ara", command=perform).pack(pady=5)
-    tk.Button(win, text="Klasörü Aç", command=open_folder).pack()
-
-# Arama penceresi butonu
-
-# GUI günlüğü ve başlatma
-log_area = scrolledtext.ScrolledText(window, width=70, height=15)
-log_area.pack(padx=10, pady=10)
-
-load_config()
-window.mainloop()
-
-    win = tk.Toplevel(window)
-    win.title("🔎 Metin Dosyasında Ara (Pencere)")
-    win.geometry("520x400")
-    tk.Label(win, text="Aranacak Kelime:").pack()
-    entry = tk.Entry(win, width=40)
-    entry.pack()
-    result_box = tk.Listbox(win, width=70, height=15)
-    result_box.pack(pady=10)
-    def perform():
-        term = entry.get().strip().lower()
-        result_box.delete(0, tk.END)
-        if not term: return
-        base_path = Path(folder_var.get()) / subreddit_entry.get()
-        for post_folder in base_path.glob("*"):
-            for txt_file in post_folder.glob("*.txt"):
-                try:
-                    with open(txt_file, "r", encoding="utf-8") as f:
-                        if term in f.read().lower():
-                            result_box.insert(tk.END, str(post_folder))
-                            break
-                except:
-                    continue
-
-    def open_folder():
-        selected = result_box.get(tk.ACTIVE)
-        if selected:
-            subprocess.Popen(f'explorer "{selected}"' if os.name == "nt" else ["xdg-open", selected])
-
-    tk.Button(win, text="Ara", command=perform).pack(pady=5)
-    tk.Button(win, text="Klasörü Aç", command=open_folder).pack()
-
-# Arama pencere butonu
-
-    def perform():
-        term = entry.get().strip().lower()
-        result_box.delete(0, tk.END)
-        if not term:
-            return
-        base_path = Path(folder_var.get()) / subreddit_entry.get()
-        for post_folder in base_path.glob("*"):
-            for txt_file in post_folder.glob("*.txt"):
-                try:
-                    with open(txt_file, "r", encoding="utf-8") as f:
-                        if term in f.read().lower():
-                            result_box.insert(tk.END, str(post_folder))
-                            break
-                except:
-                    continue
-
-    def open_folder():
-        selected = result_box.get(tk.ACTIVE)
-        if selected:
-            subprocess.Popen(
-                f'explorer "{selected}"' if os.name == "nt" else ["xdg-open", selected]
-            )
-
-    tk.Button(win, text="Ara", command=perform).pack(pady=5)
-    tk.Button(win, text="Klasörü Aç", command=open_folder).pack()
-
-
-
 def open_search_window():
     win = tk.Toplevel(window)
     win.title("🔎 Metin Dosyasında Ara (Pencere)")
@@ -416,3 +270,9 @@ def open_search_window():
     tk.Button(win, text="Klasörü Aç", command=open_folder).pack()
 
 tk.Button(window, text="🔎 Metin Ara (Yeni Pencere)", command=open_search_window).pack(pady=5)
+
+log_area = scrolledtext.ScrolledText(window, width=70, height=15)
+log_area.pack(padx=10, pady=10)
+
+load_config()
+window.mainloop()
